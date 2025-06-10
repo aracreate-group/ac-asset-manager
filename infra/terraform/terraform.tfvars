@@ -1,2 +1,0 @@
-hcloud_token = "I2Tf4tBS1WIa4SdWIUOD6hmeE6ZpJg1xCmmJ4mZL6ANZ055cH4WfyoXQETFHZ1NW"
-k3s_token    = "123456"
