@@ -1,0 +1,66 @@
+write_files:
+- path: /usr/local/bin/k3s-install.sh
+  permissions: '0755'
+  content: |
+    #!/bin/bash
+    set -e
+
+    until ip -4 addr show eth0 | grep -q "inet "; do
+      echo "Waiting for eth0 to be ready..."
+      sleep 2
+    done
+
+    EXTERNAL_IP=$(curl -s https://ipinfo.io/ip)
+    PRIVATE_IP=$(ip -4 addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+
+    echo "External IP: $EXTERNAL_IP"
+    echo "Private IP: $PRIVATE_IP"
+
+    if [ "${node_type}" = "server" ] && [ "${is_first}" = "true" ]; then
+      curl -sfL https://get.k3s.io | sh -s - server \
+        --token=${k3s_token} \
+        --tls-san=$EXTERNAL_IP \
+        --node-ip=$PRIVATE_IP \
+        --cluster-init \
+        --disable servicelb \
+        --disable traefik >> /var/log/k3s-install.log 2>&1
+
+      ln -s /usr/local/bin/k3s /usr/local/bin/kubectl
+
+      echo "Installing MetalLB..."
+      export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+      sleep 10
+      kubectl apply -f https://github.com/metallb/metallb/releases/download/v0.13.7/metallb-native.yaml
+      kubectl wait --namespace metallb-system --for=condition=ready pod --selector=app=metallb --timeout=90s
+
+      cat << 'EOF' | kubectl apply -f -
+      apiVersion: metallb.io/v1beta1
+      kind: IPAddressPool
+      metadata:
+        name: default-pool
+        namespace: metallb-system
+      spec:
+        addresses:
+        - $EXTERNAL_IP/32
+      ---
+      apiVersion: metallb.io/v1beta1
+      kind: L2Advertisement
+      metadata:
+        name: default-advert
+        namespace: metallb-system
+      spec:
+        ipAddressPools:
+        - default-pool
+      EOF
+
+    elif [ "${node_type}" = "server" ]; then
+      curl -sfL https://get.k3s.io | sh -s - server \
+        --token=${k3s_token} \
+        --tls-san=$EXTERNAL_IP \
+        --node-ip=$PRIVATE_IP \
+        --server https://${master_ip}:6443 \
+        --disable servicelb \
+        --disable traefik >> /var/log/k3s-install.log 2>&1
+
+      ln -s /usr/local/bin/k3s /usr/local/bin/kubectl
+    fi

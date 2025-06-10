@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api
+          image: gowthamaracreate/test:api
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 4001
+          env:
+          - name: AUTH_SERVICE_URL
+            value: "http://auth.default.svc.cluster.local:4001"
+          - name: NODE_ENV
+            value: "production"

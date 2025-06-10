@@ -1,0 +1,27 @@
+# name: Release
+
+# on:
+#   push:
+#     branches:
+#       - dev
+#       - main
+
+# jobs:
+#   release:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v2
+
+#       - name: Install Node.js
+#         uses: actions/setup-node@v2
+#         with:
+#           node-version: 20
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Release
+#         run: npx semantic-release
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

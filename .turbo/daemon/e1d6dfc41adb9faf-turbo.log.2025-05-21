@@ -1,0 +1,58 @@
+2025-05-21T02:56:44.227590Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/package.json")}
+2025-05-21T02:56:44.228302Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-05-21T02:56:44.322864Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/daemon/e1d6dfc41adb9faf-turbo.log.2025-05-21")}
+2025-05-21T02:56:44.322892Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-05-21T02:58:57.923097Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/dockerfile")}
+2025-05-21T02:58:57.923112Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-05-21T02:59:07.159943Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/dockerfile")}
+2025-05-21T02:59:07.159964Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-05-21T03:02:25.721383Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/dockerfile")}
+2025-05-21T03:02:25.721399Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-05-21T03:05:00.223442Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/dockerfile")}
+2025-05-21T03:05:00.223463Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-05-21T03:07:12.824526Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/dockerfile")}
+2025-05-21T03:07:12.824541Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-05-21T03:10:46.028048Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".dockerignore")}
+2025-05-21T03:10:46.028062Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-05-21T03:10:58.628609Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".dockerignore")}
+2025-05-21T03:10:58.628622Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-05-21T03:10:58.828634Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".dockerignore")}
+2025-05-21T03:10:58.828663Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-05-21T03:11:59.628746Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/dockerfile")}
+2025-05-21T03:11:59.628759Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-05-21T03:19:00.210089Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".dockerignore")}
+2025-05-21T03:19:00.210103Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-05-21T03:19:17.909985Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/12.cookie")}
+2025-05-21T03:19:17.910002Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-05-21T03:19:53.511453Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/package.json")}
+2025-05-21T03:19:53.511467Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-05-21T03:20:26.111532Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/13.cookie")}
+2025-05-21T03:20:26.111553Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-05-21T03:20:26.712848Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.turbo")}
+2025-05-21T03:20:26.712861Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-05-21T03:20:26.742520Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-05-21T03:20:57.612694Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(""), AnchoredSystemPathBuf("_tmp_45624_22ca0b6e7befcd82b1d3ee4a996b8473")}
+2025-05-21T03:20:57.612705Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-05-21T03:20:58.324941Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-05-21T03:20:58.324951Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-05-21T03:20:58.714865Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-05-21T03:20:58.714880Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-05-21T03:20:58.814366Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-05-21T03:20:58.814377Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-05-21T03:20:58.915064Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-05-21T03:20:58.915082Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-05-21T03:20:59.115102Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-05-21T03:20:59.115116Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-05-21T03:20:59.216655Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-05-21T03:20:59.216669Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-05-21T03:20:59.316521Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-05-21T03:20:59.316534Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-05-21T03:20:59.420980Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-05-21T03:20:59.420991Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-05-21T03:20:59.513137Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-05-21T03:20:59.513152Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-05-21T03:20:59.617423Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("")}
+2025-05-21T03:20:59.617438Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({}))
+2025-05-21T03:21:13.913871Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/14.cookie")}
+2025-05-21T03:21:13.913899Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-05-21T03:22:17.273911Z  INFO turborepo_lib::daemon::server: triggering shutdown

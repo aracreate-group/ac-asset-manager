@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: web
+        image: gowthamaracreate/test
+        ports:
+        - containerPort: 3000
+        env:
+        - name: NODE_ENV
+          value: "production"
+        # - name: NEXT_PUBLIC_API_URL
+        #   value: "http://api.default.svc.cluster.local:4000"
+        # - name: NEXT_PUBLIC_AUTH_URL
+        #   value: "http://auth.default.svc.cluster.local:4001"

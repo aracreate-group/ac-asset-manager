@@ -1,0 +1,11 @@
+
+resources:
+  - secrets.yaml
+  - configmap.yaml
+  - web-deployment.yaml
+  - web-service.yaml
+  # - api-deployment.yaml
+  # - api-service.yaml
+  # - auth-deployment.yaml
+  # - auth-service.yaml
+  - issuer.yaml

@@ -1,0 +1,146 @@
+# # name: CI/CD Pipeline
+
+# # on:
+# #   release:
+# #     types: [published]
+
+# # jobs:
+# #   build_and_deploy:
+# #     runs-on: self-hosted
+
+# #     steps:
+# #     - name: Checkout code
+# #       uses: actions/checkout@v3
+
+# #     - name: Log in to Docker hub
+# #       uses: docker/login-action@v2
+# #       with:
+# #         username: ${{ secrets.DOCKER_USERNAME }}
+# #         password: ${{ secrets.DOCKER_PASSWORD }}
+
+# #     - name: Remove Old Docker Containers
+# #       run: |
+# #         docker ps -q --filter "name=calendar-client-nginx" | xargs -r docker stop
+# #         docker ps -q --filter "name=calendar-api" | xargs -r docker stop
+# #         docker ps -a -q --filter "name=calendar-client-nginx" | xargs -r docker rm
+# #         docker ps -a -q --filter "name=calendar-api" | xargs -r docker rm
+
+# #     - name: Remove Old Docker Images
+# #       run: |
+# #         docker images --filter "reference=gowthamaracreate/calendar-merger-client-nginx" -q | xargs -r docker rmi
+# #         docker images --filter "reference=gowthamaracreate/calendar-merger-api" -q | xargs -r docker rmi
+
+# #     - name: Build Docker Images
+# #       env:
+# #         DOCKER_BUILDKIT: 1
+# #       run: |
+# #         docker build -f ./system/client/dockerfile.prod -t gowthamaracreate/calendar-merger-client-nginx:${{ github.event.release.tag_name }} ./system/client
+# #         docker build -f ./system/server/dockerfile.prod -t gowthamaracreate/calendar-merger-api:${{ github.event.release.tag_name }} ./system/server 
+
+# #     - name: Push Docker Images
+# #       run: |
+# #         docker push gowthamaracreate/calendar-merger-client-nginx:${{ github.event.release.tag_name }}
+# #         docker push gowthamaracreate/calendar-merger-api:${{ github.event.release.tag_name }}
+
+# #     - name: Set up Docker Compose
+# #       run: |
+# #         docker-compose -f ./system/docker-compose.yml up -d
+# #       env:
+# #         VERSION: ${{ github.event.release.tag_name }}
+# #         DATABASE_URL: ${{ secrets.DATABASE_URL }}
+# #         NOTIFICATION_WEBHOOK_URL: ${{ secrets.NOTIFICATION_WEBHOOK_URL }}
+# #         REDIRECT_URL: ${{ secrets.REDIRECT_URL }}
+# #         GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+# #         GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+# #         CLIENT_CALLBACK_REDIRECT_URL: ${{ secrets.CLIENT_CALLBACK_REDIRECT_URL }}
+# #         MONGO_USER: ${{ secrets.MONGO_USER }}
+# #         MONGO_PW: ${{ secrets.MONGO_PW }}
+# #         MONGO_DB_NAME: ${{ secrets.MONGO_DB_NAME }}
+
+# name: CI/CD to K3s
+
+# on:
+#   release:
+#     types: [published]
+
+# jobs:
+#   build_and_deploy:
+#     runs-on: self-hosted
+
+#     env:
+#       IMAGE_TAG: ${{ github.event.release.tag_name }}
+#       BRANCH_NAME: ${{ github.event.release.target_commitish }}
+
+#     steps:
+#     - name: Checkout Code
+#       uses: actions/checkout@v3
+
+#     - name: Log in to Docker Hub
+#       uses: docker/login-action@v2
+#       with:
+#         username: ${{ secrets.DOCKER_USERNAME }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
+
+#     - name: Set IMAGE_TAG for Compose
+#       run: |
+#         echo "IMAGE_TAG=$IMAGE_TAG" > .env
+
+#     - name: Check user and groups
+#       run: |
+#         whoami
+#         groups
+#         sudo docker info
+
+#     - name: Build & Push Docker Images using Compose
+#       run: |
+#         echo "Building and pushing Docker images with tag: $IMAGE_TAG"
+#         sudo docker compose build --no-cache
+#         sudo docker push gowthamaracreate/test:$IMAGE_TAG
+
+#     # - name: Set up Kubeconfig
+#     #   run: |
+#     #     mkdir -p $HOME/.kube
+#     #     echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > $HOME/.kube/config-arm
+
+#     - name: Determine Namespace
+#       id: ns
+#       run: |
+#         case "$BRANCH_NAME" in
+#           main) echo "namespace=production" >> $GITHUB_OUTPUT ;;
+#           staging) echo "namespace=staging" >> $GITHUB_OUTPUT ;;
+#           dev) echo "namespace=dev" >> $GITHUB_OUTPUT ;;
+#           test) echo "namespace=test" >> $GITHUB_OUTPUT ;;
+#           *) echo "namespace=default" >> $GITHUB_OUTPUT ;;
+#         esac
+
+#     - name: Apply k8s manifests
+#       run: |
+#         # Replace the IMAGE_TAG placeholder in kustomization.yaml
+#         cd tools/k8s/overlays/${{ steps.ns.outputs.namespace }}
+#         sed -i "s/\${IMAGE_TAG}/$IMAGE_TAG/g" kustomization.yaml
+        
+#         # Now run kustomize and apply
+#         cd -
+#         kubectl kustomize tools/k8s/overlays/${{ steps.ns.outputs.namespace }} | kubectl apply -n ${{ steps.ns.outputs.namespace }} -f - --validate=false
+
+#     # - name: Apply k8s manifests
+#     #   run: |
+#     #     kubectl kustomize tools/k8s/overlays/${{ steps.ns.outputs.namespace }} | kubectl apply -n ${{ steps.ns.outputs.namespace }} -f - --validate=false
+#     #     # kubectl apply -n ${{ steps.ns.outputs.namespace }} -f tools/k8s/overlays/${{ steps.ns.outputs.namespace }} --validate=false
+
+#     # - name: Export KUBECONFIG
+#     #   run: echo "KUBECONFIG=$HOME/.kube/config" >> $GITHUB_ENV
+
+#     # - name: Set KUBECONFIG
+#     #   env:
+#     #     KUBECONFIG: $HOME/.kube/config
+#     #   run: |
+#     #     # echo "Using context:"
+#     #     # kubectl config current-context
+#     #     kubectl get pods
+#     #     # echo "Creating namespace ${{ steps.ns.outputs.namespace }} if it doesn't exist"
+#     #     # kubectl create namespace ${{ steps.ns.outputs.namespace }} --dry-run=client -o yaml | kubectl apply -f -
+
+#     #     echo "Applying manifests from tools/k8s/overlays/${{ steps.ns.outputs.namespace }}"
+#     #     kubectl apply -n ${{ steps.ns.outputs.namespace }} -f tools/k8s/overlays/${{ steps.ns.outputs.namespace }} --validate=false
+

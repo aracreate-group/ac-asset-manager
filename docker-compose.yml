@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  # api:
+  #   build:
+  #     context: .
+  #     dockerfile: apps/api/dockerfile
+  #   image: gowthamaracreate/test:api
+  #   ports:
+  #     - "4000:4000"
+  #   environment:
+  #     - AUTH_SERVICE_URL=http://auth:4001
+  #     - NODE_ENV=production
+  #   networks:
+  #     - app-network
+
+  # auth:
+  #   build:
+  #     context: .
+  #     dockerfile: services/auth/dockerfile
+  #   image: gowthamaracreate/test:auth
+  #   ports:
+  #     - "4001:4001"
+  #   environment:
+  #     - NODE_ENV=production
+  #   networks:
+  #     - app-network
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/dockerfile
+      # args:
+      #   NEXT_PUBLIC_API_URL: https://dev.arametrics.app/api
+    image: gowthamaracreate/test:${IMAGE_TAG}
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_AUTH_URL=http://auth:4001
+
+    networks:
+      - app-network
+    # depends_on:
+    #   - api
+    #   - auth
+
+networks:
+  app-network:
+    driver: bridge
